@@ -1,1386 +1,553 @@
-{
-  "name": "tanstack_start_ts",
-  "private": true,
-  "sideEffects": false,
-  "type": "module",
-  "scripts": {
-    "dev": "vite dev",
-    "build": "vite build",
-    "build:dev": "vite build --mode development",
-    "preview": "vite preview",
-    "lint": "eslint .",
-    "format": "prettier --write ."
-  },
-  "dependencies": {
-    "@hookform/resolvers": "^5.2.2",
-    "@radix-ui/react-accordion": "^1.2.12",
-    "@radix-ui/react-alert-dialog": "^1.1.15",
-    "@radix-ui/react-aspect-ratio": "^1.1.8",
-    "@radix-ui/react-avatar": "^1.1.11",
-    "@radix-ui/react-checkbox": "^1.3.3",
-    "@radix-ui/react-collapsible": "^1.1.12",
-    "@radix-ui/react-context-menu": "^2.2.16",
-    "@radix-ui/react-dialog": "^1.1.15",
-    "@radix-ui/react-dropdown-menu": "^2.1.16",
-    "@radix-ui/react-hover-card": "^1.1.15",
-    "@radix-ui/react-label": "^2.1.8",
-    "@radix-ui/react-menubar": "^1.1.16",
-    "@radix-ui/react-navigation-menu": "^1.2.14",
-    "@radix-ui/react-popover": "^1.1.15",
-    "@radix-ui/react-progress": "^1.1.8",
-    "@radix-ui/react-radio-group": "^1.3.8",
-    "@radix-ui/react-scroll-area": "^1.2.10",
-    "@radix-ui/react-select": "^2.2.6",
-    "@radix-ui/react-separator": "^1.1.8",
-    "@radix-ui/react-slider": "^1.3.6",
-    "@radix-ui/react-slot": "^1.2.4",
-    "@radix-ui/react-switch": "^1.2.6",
-    "@radix-ui/react-tabs": "^1.1.13",
-    "@radix-ui/react-toggle": "^1.1.10",
-    "@radix-ui/react-toggle-group": "^1.1.11",
-    "@radix-ui/react-tooltip": "^1.2.8",
-    "@tailwindcss/vite": "^4.2.1",
-    "@tanstack/react-query": "^5.101.1",
-    "@tanstack/react-router": "^1.170.16",
-    "@tanstack/react-start": "^1.168.26",
-    "@tanstack/router-plugin": "^1.168.18",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "cmdk": "^1.1.1",
-    "date-fns": "^4.1.0",
-    "embla-carousel-react": "^8.6.0",
-    "input-otp": "^1.4.2",
-    "lucide-react": "^0.575.0",
-    "react": "^19.2.0",
-    "react-day-picker": "^9.14.0",
-    "react-dom": "^19.2.0",
-    "react-hook-form": "^7.71.2",
-    "react-resizable-panels": "^4.6.5",
-    "recharts": "^2.15.4",
-    "sonner": "^2.0.7",
-    "tailwind-merge": "^3.5.0",
-    "tailwindcss": "^4.2.1",
-    "tw-animate-css": "^1.3.4",
-    "vaul": "^1.1.2",
-    "vite-tsconfig-paths": "^6.0.2",
-    "zod": "^3.24.2"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.32.0",
-    "@lovable.dev/vite-tanstack-config": "^2.8.0",
-    "@types/node": "^22.16.5",
-    "@types/react": "^19.2.0",
-    "@types/react-dom": "^19.2.0",
-    "@vitejs/plugin-react": "^5.2.0",
-    "eslint": "^9.32.0",
-    "eslint-config-prettier": "^10.1.1",
-    "eslint-plugin-prettier": "^5.2.6",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.20",
-    "globals": "^15.15.0",
-    "nitro": "3.0.260603-beta",
-    "prettier": "^3.7.3",
-    "typescript": "^5.8.3",
-    "typescript-eslint": "^8.56.1",
-    "vite": "^8.1.5"
-  }
-}
-import { defineConfig } from "@lovable.dev/vite-tanstack-config";
+/* ============================================================
+   FILE 1 — src/data/products.ts
+   ============================================================ */
+export type Category = "perfumes" | "watches";
 
-export default defineConfig({
-  tanstackStart: {
-    server: { entry: "server" },
-  },
-});
-{
-  "include": ["src/**/*.ts", "src/**/*.tsx", "vite.config.ts", "eslint.config.js"],
-  "compilerOptions": {
-    "target": "ES2022",
-    "jsx": "react-jsx",
-    "module": "ESNext",
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "types": ["vite/client"],
-    "moduleResolution": "Bundler",
-    "allowImportingTsExtensions": true,
-    "verbatimModuleSyntax": false,
-    "noEmit": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true,
-    "paths": {
-      "@/*": ["./src/*"]
-    }
-  }
-}
-@import "tailwindcss" source(none);
-@source "../src";
-@import "tw-animate-css";
-
-@custom-variant dark (&:is(.dark *));
-
-@theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-gold: var(--gold);
-  --color-gold-soft: var(--gold-soft);
-  --color-cream: var(--cream);
-  --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --tracking-widest-2: 0.28em;
+export interface Product {
+  id: string;
+  name: string;
+  tagline: string;
+  price: number; // PKR
+  category: Category;
+  image: string;
 }
 
-:root {
-  --radius: 0.5rem;
-  --background: oklch(0.14 0.005 40);
-  --foreground: oklch(0.94 0.01 80);
-  --card: oklch(0.18 0.006 40);
-  --card-foreground: oklch(0.94 0.01 80);
-  --popover: oklch(0.18 0.006 40);
-  --popover-foreground: oklch(0.94 0.01 80);
-  --primary: oklch(0.78 0.11 80);
-  --primary-foreground: oklch(0.14 0.005 40);
-  --secondary: oklch(0.22 0.008 40);
-  --secondary-foreground: oklch(0.94 0.01 80);
-  --muted: oklch(0.22 0.008 40);
-  --muted-foreground: oklch(0.68 0.02 70);
-  --accent: oklch(0.78 0.11 80);
-  --accent-foreground: oklch(0.14 0.005 40);
-  --destructive: oklch(0.58 0.22 27);
-  --destructive-foreground: oklch(0.98 0.01 80);
-  --border: oklch(0.28 0.01 60 / 60%);
-  --input: oklch(0.28 0.01 60);
-  --ring: oklch(0.78 0.11 80);
-  --gold: oklch(0.78 0.11 80);
-  --gold-soft: oklch(0.68 0.09 78);
-  --cream: oklch(0.94 0.02 85);
+const u = (id: string) =>
+  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=800&h=1000&q=80`;
+
+export const products: Product[] = [
+  // ---------- PERFUMES ----------
+  { id: "p1", name: "Noir Absolu", tagline: "Oud, leather, black amber", price: 42500, category: "perfumes", image: u("photo-1594035910387-fea47794261f") },
+  { id: "p2", name: "Rose Éternelle", tagline: "Taif rose, saffron, musk", price: 38900, category: "perfumes", image: u("photo-1595425959632-34f2822322ce") },
+  { id: "p3", name: "Santal Royale", tagline: "Sandalwood, cardamom, vetiver", price: 46700, category: "perfumes", image: u("photo-1587017539504-67cfbddac569") },
+  { id: "p4", name: "Ambre Nuit", tagline: "Amber resin, vanilla bourbon", price: 51200, category: "perfumes", image: u("photo-1541643600914-78b084683601") },
+  { id: "p5", name: "Velvet Oud", tagline: "Cambodian oud, patchouli", price: 68900, category: "perfumes", image: u("photo-1592945403244-b3fbafd7f539") },
+  { id: "p6", name: "Fleur de Sel", tagline: "Sea salt, neroli, iris", price: 33400, category: "perfumes", image: u("photo-1615634260167-c8cdede054de") },
+  { id: "p7", name: "Cuir Impérial", tagline: "Suede, birch tar, tonka", price: 57300, category: "perfumes", image: u("photo-1585386959984-a4155224a1ad") },
+  { id: "p8", name: "Jasmin Sauvage", tagline: "Night jasmine, tuberose", price: 36800, category: "perfumes", image: u("photo-1523293182086-7651a899d37f") },
+  { id: "p9", name: "Bois Fumé", tagline: "Smoked cedar, incense, myrrh", price: 49500, category: "perfumes", image: u("photo-1557170334-a9632e77c6e4") },
+  { id: "p10", name: "Musk Blanc", tagline: "White musk, cashmere wood", price: 29900, category: "perfumes", image: u("photo-1610461888750-10bfc601b874") },
+  { id: "p11", name: "Safran Doré", tagline: "Saffron, honey, labdanum", price: 61500, category: "perfumes", image: u("photo-1563170351-be82bc888aa4") },
+  { id: "p12", name: "Vanille Obscure", tagline: "Madagascar vanilla, cacao", price: 44200, category: "perfumes", image: u("photo-1571875257727-256c39da42af") },
+  { id: "p13", name: "Iris Nocturne", tagline: "Orris root, violet, ambrette", price: 53800, category: "perfumes", image: u("photo-1547887538-e3a2f32cb1cc") },
+
+  // ---------- WATCHES ----------
+  { id: "w1", name: "Chrono Sovereign", tagline: "Automatic chronograph, steel", price: 289000, category: "watches", image: u("photo-1524592094714-0f0654e20314") },
+  { id: "w2", name: "Meridian Gold", tagline: "18k gold case, sapphire glass", price: 685000, category: "watches", image: u("photo-1523170335258-f5ed11844a49") },
+  { id: "w3", name: "Obsidian Diver", tagline: "300m water resistance", price: 342000, category: "watches", image: u("photo-1547996160-81dfa63595aa") },
+  { id: "w4", name: "Regent Skeleton", tagline: "Open-heart movement", price: 512000, category: "watches", image: u("photo-1587836374828-4dbafa94cf0e") },
+  { id: "w5", name: "Aviator Noir", tagline: "Pilot dial, calfskin strap", price: 236000, category: "watches", image: u("photo-1533139502658-0198f920d8e8") },
+  { id: "w6", name: "Lumière Classique", tagline: "Ultra-thin dress watch", price: 398000, category: "watches", image: u("photo-1526045431048-f857369baa09") },
+  { id: "w7", name: "Titan GMT", tagline: "Dual timezone, titanium", price: 447000, category: "watches", image: u("photo-1508057198894-247b23fe5ade") },
+  { id: "w8", name: "Perpetual Onyx", tagline: "Perpetual calendar, black PVD", price: 759000, category: "watches", image: u("photo-1522312346375-d1a52e2b99b3") },
+  { id: "w9", name: "Heritage Moonphase", tagline: "Moonphase complication", price: 623000, category: "watches", image: u("photo-1548171915-e79a380a2a4b") },
+  { id: "w10", name: "Steel Monarch", tagline: "Integrated bracelet, 41mm", price: 375000, category: "watches", image: u("photo-1434056886845-dac89ffe9b56") },
+  { id: "w11", name: "Rosegold Aria", tagline: "Rose gold, mother of pearl", price: 528000, category: "watches", image: u("photo-1594534475808-b18fc33b045e") },
+  { id: "w12", name: "Nocturne Tourbillon", tagline: "Flying tourbillon, hand-wound", price: 1450000, category: "watches", image: u("photo-1509048191080-d2984bad6ae5") },
+  { id: "w13", name: "Explorer Bronze", tagline: "Bronze case, patina dial", price: 264000, category: "watches", image: u("photo-1495856458515-0637185db551") },
+];
+
+export const formatPKR = (n: number) => `PKR ${n.toLocaleString("en-PK")}`;
+
+/* ---------------- CURRENCY ---------------- */
+
+export interface Currency {
+  code: string;
+  symbol: string;
+  /** how many PKR 1 unit of this currency is worth */
+  perPkr: number;
+  decimals: number;
 }
 
-.dark {
-  --background: oklch(0.14 0.005 40);
-  --foreground: oklch(0.94 0.01 80);
-}
+export const currencies: Currency[] = [
+  { code: "PKR", symbol: "Rs", perPkr: 1, decimals: 0 },
+  { code: "USD", symbol: "$", perPkr: 1 / 280, decimals: 2 },
+  { code: "AED", symbol: "AED", perPkr: 1 / 76, decimals: 2 },
+  { code: "SAR", symbol: "SAR", perPkr: 1 / 74.6, decimals: 2 },
+  { code: "GBP", symbol: "£", perPkr: 1 / 355, decimals: 2 },
+  { code: "EUR", symbol: "€", perPkr: 1 / 305, decimals: 2 },
+];
 
-@layer base {
-  * {
-    border-color: var(--color-border);
-  }
-
-  html, body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
-    font-family: var(--font-sans);
-    -webkit-font-smoothing: antialiased;
-  }
-
-  h1, h2, h3, h4, .font-serif {
-    font-family: var(--font-serif);
-    font-weight: 400;
-    letter-spacing: -0.01em;
-  }
-}
-
-@utility eyebrow {
-  font-size: 0.72rem;
-  letter-spacing: var(--tracking-widest-2);
-  text-transform: uppercase;
-  color: var(--color-gold);
-  font-weight: 500;
-}
-
-@utility btn-gold {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: var(--color-gold);
-  color: var(--color-primary-foreground);
-  padding: 0.95rem 1.6rem;
-  font-size: 0.72rem;
-  letter-spacing: var(--tracking-widest-2);
-  text-transform: uppercase;
-  font-weight: 600;
-  transition: background 200ms ease, transform 200ms ease;
-}
-@utility btn-gold-hover {
-  background: var(--color-gold-soft);
-}
-
-@utility btn-outline-gold {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  border: 1px solid var(--color-gold);
-  color: var(--color-gold);
-  padding: 0.95rem 1.6rem;
-  font-size: 0.72rem;
-  letter-spacing: var(--tracking-widest-2);
-  text-transform: uppercase;
-  font-weight: 600;
-  background: transparent;
-  transition: background 200ms ease, color 200ms ease;
-}
-
-@keyframes wave-drift {
-  0%   { transform: translate3d(-25%, 0, 0); }
-  100% { transform: translate3d(0%, 0, 0); }
-}
-@keyframes wave-drift-reverse {
-  0%   { transform: translate3d(0%, 0, 0); }
-  100% { transform: translate3d(-25%, 0, 0); }
-}
-@keyframes wave-bob {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-10px); }
-}
-@keyframes ripple-pulse {
-  0%   { transform: scale(0.8); opacity: 0.55; }
-  100% { transform: scale(2.4); opacity: 0; }
-}
-
-@utility wave-slow {
-  animation: wave-drift 22s linear infinite;
-}
-@utility wave-fast {
-  animation: wave-drift-reverse 14s linear infinite;
-}
-@utility wave-bob {
-  animation: wave-bob 6s ease-in-out infinite;
-}
-@utility ripple {
-  animation: ripple-pulse 6s ease-out infinite;
-}
-import { QueryClient } from "@tanstack/react-query";
-import { createRouter } from "@tanstack/react-router";
-import { routeTree } from "./routeTree.gen";
-
-export const getRouter = () => {
-  const queryClient = new QueryClient();
-
-  const router = createRouter({
-    routeTree,
-    context: { queryClient },
-    scrollRestoration: true,
-    defaultPreloadStaleTime: 0,
-  });
-
-  return router;
+export const formatMoney = (pkr: number, c: Currency) => {
+  const value = pkr * c.perPkr;
+  return `${c.symbol} ${value.toLocaleString("en-US", {
+    minimumFractionDigits: c.decimals,
+    maximumFractionDigits: c.decimals,
+  })}`;
 };
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+/* ---------------- REVIEWS ---------------- */
+
+export interface Review {
+  id: string;
+  name: string;
+  city: string;
+  rating: number;
+  text: string;
+}
+
+export const reviews: Review[] = [
+  { id: "r1", name: "Ayesha Khan", city: "Karachi", rating: 5, text: "Noir Absolu ki longevity kamaal hai — 10+ hours. Packaging bhi bohat premium thi." },
+  { id: "r2", name: "Bilal Ahmed", city: "Lahore", rating: 5, text: "Ordered the Chrono Sovereign. Authentic piece, delivered in 2 days, WhatsApp support was instant." },
+  { id: "r3", name: "Hina Sheikh", city: "Islamabad", rating: 4, text: "Rose Éternelle is beautiful and soft. Wish the bottle was slightly bigger, otherwise perfect." },
+  { id: "r4", name: "Usman Tariq", city: "Rawalpindi", rating: 5, text: "Cash on delivery ka option best tha. Watch exactly as shown in pictures." },
+  { id: "r5", name: "Sana Malik", city: "Faisalabad", rating: 5, text: "Velvet Oud har mehfil mein compliments dilwata hai. Definitely reordering." },
+  { id: "r6", name: "Daniyal Raza", city: "Multan", rating: 5, text: "Prices in my own currency made it so easy to compare. Very smooth experience overall." },
+];
+
+
+/* ============================================================
+   FILE 2 — src/routes/index.tsx
+   ============================================================ */
+import { createFileRoute } from "@tanstack/react-router";
+import { useMemo, useState } from "react";
 import {
-  Outlet,
-  Link,
-  createRootRouteWithContext,
-  useRouter,
-  HeadContent,
-  Scripts,
-} from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+  products,
+  reviews,
+  currencies,
+  formatMoney,
+  type Category,
+  type Product,
+  type Currency,
+} from "@/data/products";
 
-import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
-
-function NotFoundComponent() {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
-        </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Go home
-          </Link>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
-  console.error(error);
-  const router = useRouter();
-  useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
-
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
-        </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
-        </p>
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
-          <button
-            onClick={() => {
-              router.invalidate();
-              reset();
-            }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Try again
-          </button>
-          <a
-            href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-          >
-            Go home
-          </a>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "K. Fragrance — Hand-Blended Perfumes in Gujrat, Pakistan" },
-      {
-        name: "description",
-        content:
-          "Small-batch, hand-blended perfumes from Gujrat, Pakistan. Oriental, floral, woody, and citrus scents at honest PKR prices. Order via WhatsApp.",
-      },
-      { property: "og:title", content: "K. Fragrance — Hand-Blended Perfumes in Gujrat, Pakistan" },
-      {
-        property: "og:description",
-        content: "Small-batch, hand-blended perfumes from Gujrat, Pakistan. Oriental, floral, woody, and citrus scents at honest PKR prices. Order via WhatsApp.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "K. Fragrance — Hand-Blended Perfumes in Gujrat, Pakistan" },
-      { name: "twitter:description", content: "Small-batch, hand-blended perfumes from Gujrat, Pakistan. Oriental, floral, woody, and citrus scents at honest PKR prices. Order via WhatsApp." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/76d83baa-a979-446c-a278-d52586ac0751" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/76d83baa-a979-446c-a278-d52586ac0751" },
-    ],
-    links: [
-      { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap",
-      },
-    ],
-  }),
-  shellComponent: RootShell,
-  component: RootComponent,
-  notFoundComponent: NotFoundComponent,
-  errorComponent: ErrorComponent,
-});
-
-function RootShell({ children }: { children: ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
-
-function RootComponent() {
-  const { queryClient } = Route.useRouteContext();
-
-  return (
-    <QueryClientProvider client={queryClient}>
-      <Outlet />
-    </QueryClientProvider>
-  );
-}
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ShoppingBag, ChevronDown, Star, Quote } from "lucide-react";
+const WHATSAPP_NUMBER = "923169972901";
+const PHONE_DISPLAY = "+92 316 9972901";
+const EMAIL = "kabeerakbar1000@gmail.com";
+const BRAND = "K .";
+const BRAND_SUB = "Fragrances & Watches";
 
 export const Route = createFileRoute("/")({
-  component: Home,
   head: () => ({
     meta: [
-      { title: "K. Fragrance — Hand-Blended Perfumes in Gujrat, Pakistan" },
+      { title: "K . Fragrances & Watches — Luxury Perfumes & Timepieces" },
       {
         name: "description",
         content:
-          "Small-batch, hand-blended perfumes from Gujrat, Pakistan. Oriental, floral, woody, and citrus scents at honest PKR prices. Order via WhatsApp.",
+          "K . Fragrances & Watches — 26 luxury perfumes and timepieces. Choose your currency, add to cart and order instantly on WhatsApp.",
       },
-      { property: "og:title", content: "K. Fragrance — Hand-Blended Perfumes in Gujrat, Pakistan" },
+      { property: "og:title", content: "K . Fragrances & Watches — Luxury Perfumes & Timepieces" },
       {
         property: "og:description",
-        content: "Small-batch, hand-blended perfumes from Gujrat, Pakistan. Oriental, floral, woody, and citrus scents at honest PKR prices. Order via WhatsApp.",
-      },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [{ rel: "canonical", href: "/" }],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Store",
-          name: "K. Fragrance",
-          description: "Hand-blended small-batch perfumes and curated watches.",
-          address: { "@type": "PostalAddress", addressLocality: "Gujrat", addressCountry: "PK" },
-          telephone: "+92-316-9972901",
-          email: "kabeerakbar1000@gmail.com",
-        }),
+        content:
+          "26 luxury perfumes and timepieces. Choose your currency, add to cart and order instantly on WhatsApp.",
       },
     ],
   }),
+  component: Index,
 });
 
-const HERO =
-  "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=1920&q=80";
+interface CartLine {
+  product: Product;
+  qty: number;
+}
 
-const collections = [
-  {
-    name: "Oriental",
-    tagline: "Dark, resinous, and unapologetically opulent.",
-    image:
-      "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=800&h=1100&q=80",
-  },
-  {
-    name: "Floral",
-    tagline: "Florals with depth — never timid, always remembered.",
-    image:
-      "https://images.unsplash.com/photo-1595425959632-34f2822322ce?auto=format&fit=crop&w=800&h=1100&q=80",
-  },
-  {
-    name: "Woody",
-    tagline: "Smoke, resin, and the gravitas of aged wood.",
-    image:
-      "https://images.unsplash.com/photo-1587017539504-67cfbddac569?auto=format&fit=crop&w=800&h=1100&q=80",
-  },
-];
-
-const bestsellers = [
-  {
-    name: "Nuit d'Assam",
-    family: "Oriental",
-    notes: "Oud · Rose · Saffron",
-    price: 4500,
-    image: "/__l5e/assets-v1/97588390-853f-4ba7-9f7b-22920b399368/p1.jpg",
-  },
-  {
-    name: "Rose Sofia",
-    family: "Floral",
-    notes: "Bulgarian Rose · Iris · Musk",
-    price: 3800,
-    image: "/__l5e/assets-v1/49317621-0ce3-4f17-bb54-67b1f2315615/p2.jpg",
-  },
-  {
-    name: "Boisé Karachi",
-    family: "Woody",
-    notes: "Cedar · Vetiver · Amber",
-    price: 4200,
-    image: "/__l5e/assets-v1/bd47506b-7bc5-4bbf-a12f-679068be493c/p3.jpg",
-  },
-  {
-    name: "Calabria Nº7",
-    family: "Citrus",
-    notes: "Bergamot · Neroli · Cedar",
-    price: 3500,
-    image: "/__l5e/assets-v1/de460429-2d00-49cb-ac60-b1cf2219a2e1/p4.jpg",
-  },
-  {
-    name: "Oud Malaki",
-    family: "Oriental",
-    notes: "Cambodian Oud · Leather · Tobacco",
-    price: 5200,
-    image: "/__l5e/assets-v1/75ad2c49-539f-4ae8-b491-b94a32bd134d/oud-malaki.jpg",
-  },
-  {
-    name: "Jasmine Noir",
-    family: "Floral",
-    notes: "Night Jasmine · Sandalwood · Vanilla",
-    price: 3600,
-    image: "/__l5e/assets-v1/3608767b-be1e-40c4-a8a7-b7448ec9b3b1/p5.jpg",
-  },
-  {
-    name: "Ambre Royale",
-    family: "Amber",
-    notes: "Amber · Benzoin · Tonka Bean",
-    price: 4000,
-    image: "/__l5e/assets-v1/e743c7af-7022-480c-8941-0426922b943f/p6.jpg",
-  },
-  {
-    name: "Musk Blanc",
-    family: "Musk",
-    notes: "White Musk · Cotton · Iris",
-    price: 3200,
-    image: "/__l5e/assets-v1/1b92e50e-3a79-46d8-9d96-f90ba8da3ec6/p7.jpg",
-  },
-  {
-    name: "Safran Impérial",
-    family: "Spice",
-    notes: "Saffron · Cardamom · Oud",
-    price: 4800,
-    image: "/__l5e/assets-v1/f753f6f9-936f-428e-8088-adce9949f481/p8.jpg",
-  },
-  {
-    name: "Tabac d'Or",
-    family: "Woody",
-    notes: "Tobacco Leaf · Honey · Cedar",
-    price: 3900,
-    image: "/__l5e/assets-v1/374c8196-1289-4db8-afbf-5375b67c0dc8/p9.jpg",
-  },
-  {
-    name: "Vanille Sombre",
-    family: "Gourmand",
-    notes: "Madagascar Vanilla · Coffee · Amber",
-    price: 3400,
-    image: "/__l5e/assets-v1/95a4d1ef-aeb5-4949-9f16-8523881689ff/p10.jpg",
-  },
-  {
-    name: "Iris Fumée",
-    family: "Floral",
-    notes: "Iris · Incense · Guaiac Wood",
-    price: 4100,
-    image: "/__l5e/assets-v1/89e152b0-8531-441c-9aba-a1021ced4dc3/p11.jpg",
-  },
-];
-
-const reviews = [
-  {
-    name: "Ayesha M.",
-    city: "Lahore",
-    rating: 5,
-    text: "Nuit d'Assam is unreal. Longevity all day, and the sillage turns heads. Worth every rupee.",
-  },
-  {
-    name: "Hamza R.",
-    city: "Islamabad",
-    rating: 5,
-    text: "Boisé Karachi has become my signature. Feels expensive without the designer markup.",
-  },
-  {
-    name: "Sana K.",
-    city: "Gujrat",
-    rating: 4,
-    text: "Rose Sofia is beautifully done — proper Bulgarian rose, not synthetic. Packaging is lovely too.",
-  },
-  {
-    name: "Bilal A.",
-    city: "Rawalpindi",
-    rating: 5,
-    text: "Ordered Oud Malaki. Rich, smoky, and lasted a full day on my thobe. Highly recommended.",
-  },
-];
-
-function Home() {
+function Stars({ rating }: { rating: number }) {
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <Nav />
-      <Hero />
-      <Collections />
-      <Bestsellers />
-      <Reviews />
-      <Story />
-      <Footer />
-    </div>
+    <span aria-label={`${rating} out of 5 stars`} className="text-gold">
+      {"★★★★★".slice(0, rating)}
+      <span className="text-muted-foreground">{"★★★★★".slice(rating)}</span>
+    </span>
   );
 }
 
-function Nav() {
-  return (
-    <header className="absolute top-0 left-0 right-0 z-30">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 md:px-10 md:py-8">
-        <nav className="hidden gap-10 text-[0.72rem] font-medium uppercase tracking-[0.28em] text-cream/80 md:flex">
-          <a href="#" className="text-gold">
-            Home
-          </a>
-          <a href="#collections" className="transition hover:text-gold">
-            Shop
-          </a>
-          <Link to="/watches" className="transition hover:text-gold">
-            Watches
-          </Link>
-        </nav>
-        <a href="#" className="flex flex-col items-center leading-tight">
-          <span className="font-serif text-2xl italic tracking-wide text-gold md:text-3xl">
-            K. Fragrance
-          </span>
-          <span className="mt-1 text-[0.6rem] uppercase tracking-[0.4em] text-cream/60">
-            Maison de Parfum
-          </span>
-        </a>
-        <nav className="hidden items-center gap-8 text-[0.72rem] font-medium uppercase tracking-[0.28em] text-cream/80 md:flex">
-          <button className="flex items-center gap-1 transition hover:text-gold">
-            PKR <ChevronDown className="h-3 w-3" />
-          </button>
-          <button aria-label="Cart" className="transition hover:text-gold">
-            <ShoppingBag className="h-5 w-5" />
-          </button>
-          <a href="#reviews" className="transition hover:text-gold">
-            Reviews
-          </a>
-          <a href="#contact" className="transition hover:text-gold">
-            Contact
-          </a>
-        </nav>
-        <Link to="/watches" className="md:hidden text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-gold">
-          Watches
-        </Link>
-      </div>
-    </header>
+function Index() {
+  const [category, setCategory] = useState<Category>("perfumes");
+  const [query, setQuery] = useState("");
+  const [cart, setCart] = useState<CartLine[]>([]);
+  const [cartOpen, setCartOpen] = useState(false);
+  const [currency, setCurrency] = useState<Currency>(currencies[0]);
+
+  const price = (pkr: number) => formatMoney(pkr, currency);
+
+  const inCategory = useMemo(
+    () => products.filter((p) => p.category === category),
+    [category],
   );
-}
 
-function Hero() {
+  // Empty / whitespace-only query always shows the full category.
+  const visible = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return inCategory;
+    return inCategory.filter(
+      (p) =>
+        p.name.toLowerCase().includes(q) || p.tagline.toLowerCase().includes(q),
+    );
+  }, [inCategory, query]);
+
+  const count = cart.reduce((s, l) => s + l.qty, 0);
+  const total = cart.reduce((s, l) => s + l.qty * l.product.price, 0);
+
+  const add = (product: Product) => {
+    setCart((prev) => {
+      const found = prev.find((l) => l.product.id === product.id);
+      if (found) {
+        return prev.map((l) =>
+          l.product.id === product.id ? { ...l, qty: l.qty + 1 } : l,
+        );
+      }
+      return [...prev, { product, qty: 1 }];
+    });
+    setCartOpen(true);
+  };
+
+  const changeQty = (id: string, delta: number) =>
+    setCart((prev) =>
+      prev
+        .map((l) => (l.product.id === id ? { ...l, qty: l.qty + delta } : l))
+        .filter((l) => l.qty > 0),
+    );
+
+  const whatsappHref = useMemo(() => {
+    const lines = cart.length
+      ? cart
+          .map((l) => `• ${l.product.name} × ${l.qty} — ${price(l.product.price * l.qty)}`)
+          .join("\n")
+      : "I'd like to know more about your collection.";
+    const msg =
+      `Hello ${BRAND} ${BRAND_SUB},\n\nI would like to place an order:\n\n${lines}` +
+      (cart.length ? `\n\nTotal: ${price(total)} (${currency.code})` : "");
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cart, total, currency]);
+
   return (
-    <section className="relative min-h-[100svh] w-full overflow-hidden">
-      <img
-        src={HERO}
-        alt="Luxury perfume bottle on black satin surrounded by red petals"
-        className="absolute inset-0 h-full w-full object-cover"
-      />
-
-      <div className="pointer-events-none absolute inset-0 z-[1] mix-blend-screen opacity-60">
-        <svg
-          className="absolute inset-x-0 top-1/4 h-1/2 w-[220%] wave-slow"
-          viewBox="0 0 1440 320"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <path
-            fill="var(--color-gold)"
-            fillOpacity="0.18"
-            d="M0,192L48,181.3C96,171,192,149,288,165.3C384,181,480,235,576,229.3C672,224,768,160,864,138.7C960,117,1056,139,1152,160C1248,181,1344,203,1392,213.3L1440,224L1440,320L0,320Z"
-          />
-        </svg>
-        <svg
-          className="absolute inset-x-0 top-1/3 h-1/2 w-[220%] wave-fast"
-          viewBox="0 0 1440 320"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <path
-            fill="var(--color-gold-soft)"
-            fillOpacity="0.14"
-            d="M0,224L60,213.3C120,203,240,181,360,192C480,203,600,245,720,240C840,235,960,181,1080,165.3C1200,149,1320,171,1380,181.3L1440,192L1440,320L0,320Z"
-          />
-        </svg>
-        <svg
-          className="absolute inset-x-0 bottom-0 h-1/3 w-[220%] wave-slow"
-          viewBox="0 0 1440 320"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <path
-            fill="var(--color-cream)"
-            fillOpacity="0.08"
-            d="M0,256L48,240C96,224,192,192,288,197.3C384,203,480,245,576,250.7C672,256,768,224,864,208C960,192,1056,192,1152,197.3C1248,203,1344,213,1392,218.7L1440,224L1440,320L0,320Z"
-          />
-        </svg>
-
-        <div className="absolute right-[8%] top-1/2 hidden -translate-y-1/2 md:block">
-          <span
-            className="ripple absolute -inset-40 rounded-full border border-gold/40"
-            style={{ animationDelay: "0s" }}
-          />
-          <span
-            className="ripple absolute -inset-40 rounded-full border border-gold/30"
-            style={{ animationDelay: "2s" }}
-          />
-          <span
-            className="ripple absolute -inset-40 rounded-full border border-gold/20"
-            style={{ animationDelay: "4s" }}
-          />
-        </div>
-      </div>
-
-      <div className="absolute inset-0 z-[2] bg-gradient-to-r from-background/90 via-background/60 to-background/30" />
-      <div className="absolute inset-0 z-[2] bg-gradient-to-b from-background/60 via-transparent to-background" />
-
-      <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl items-center px-6 md:px-10">
-        <div className="max-w-xl pt-28 md:pt-0 wave-bob">
-          <p className="eyebrow">— The House of K. Fragrance</p>
-          <h1 className="mt-6 font-serif text-4xl leading-[1.05] text-cream sm:text-5xl md:text-7xl">
-            Scents That Linger{" "}
-            <span className="italic text-gold">Long After</span> You Leave
-          </h1>
-          <p className="mt-6 max-w-md text-sm leading-relaxed text-cream/75 sm:mt-8 sm:text-base">
-            Hand-blended in small batches and aged before bottling. Honest prices,
-            uncompromising ingredients — built to last in the room, and in memory.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3 sm:mt-10 sm:gap-4">
-            <a href="#collections" className="btn-gold hover:bg-[var(--color-gold-soft)]">
-              Shop Now <ArrowRight className="h-4 w-4" />
-            </a>
-            <Link to="/watches" className="btn-outline-gold hover:bg-gold hover:text-primary-foreground">
-              Explore Watches
-            </Link>
+    <div className="min-h-screen bg-background">
+      {/* NAV */}
+      <header className="sticky top-0 z-40 border-b border-border/60 bg-background/90 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-5 py-4">
+          <div className="leading-none">
+            <span className="font-display text-2xl tracking-[0.2em] text-foreground">
+              {BRAND}
+            </span>
+            <span className="mt-1 block text-[9px] tracking-luxe text-gold-soft">
+              {BRAND_SUB}
+            </span>
           </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
-function Collections() {
-  return (
-    <section id="collections" className="py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-6 md:px-10">
-        <div className="mb-14 text-center">
-          <p className="eyebrow">— Explore by Family</p>
-          <h2 className="mt-4 font-serif text-4xl text-cream md:text-5xl">
-            Featured <span className="italic text-gold">Collections</span>
-          </h2>
-        </div>
-        <div className="grid gap-6 md:grid-cols-3">
-          {collections.map((c) => (
-            <a
-              key={c.name}
-              href="#bestsellers"
-              className="group relative block overflow-hidden bg-card"
-            >
-              <div className="aspect-[3/4] overflow-hidden">
-                <img
-                  src={c.image}
-                  alt={`${c.name} fragrance collection`}
-                  className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
-                />
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-8">
-                <h3 className="font-serif text-3xl italic text-cream">{c.name}</h3>
-                <p className="mt-2 text-sm text-cream/70">{c.tagline}</p>
-                <span className="mt-5 inline-flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.28em] text-gold">
-                  Discover <ArrowRight className="h-3.5 w-3.5" />
-                </span>
-              </div>
-            </a>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+          <nav className="flex items-center gap-1 rounded-sm border border-border p-1">
+            {(["perfumes", "watches"] as Category[]).map((c) => (
+              <button
+                key={c}
+                onClick={() => setCategory(c)}
+                className={`px-3 py-2 text-[10px] tracking-luxe transition-colors sm:px-6 ${
+                  category === c
+                    ? "bg-primary text-primary-foreground"
+                    : "text-muted-foreground hover:text-gold"
+                }`}
+              >
+                {c}
+              </button>
+            ))}
+          </nav>
 
-function Bestsellers() {
-  return (
-    <section id="bestsellers" className="border-t border-border/60 py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-6 md:px-10">
-        <div className="mb-14 flex items-end justify-between gap-6">
-          <div>
-            <p className="eyebrow">— Our Perfumes</p>
-            <h2 className="mt-4 font-serif text-4xl text-cream md:text-5xl">
-              The <span className="italic text-gold">Collection</span>
-            </h2>
-          </div>
-          <a
-            href="#contact"
-            className="hidden items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.28em] text-gold hover:text-gold-soft md:inline-flex"
-          >
-            Order via WhatsApp <ArrowRight className="h-3.5 w-3.5" />
-          </a>
-        </div>
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {bestsellers.map((p) => (
-            <article key={p.name} className="group">
-              <div className="relative aspect-[4/5] overflow-hidden bg-secondary">
-                <img
-                  src={p.image}
-                  alt={`${p.name} perfume bottle`}
-                  className="h-full w-full object-cover transition-transform duration-[1000ms] ease-out group-hover:scale-105"
-                />
-                <div className="absolute inset-x-0 bottom-0 translate-y-full bg-background/85 p-4 backdrop-blur transition-transform duration-500 group-hover:translate-y-0">
-                  <a
-                    href={`https://wa.me/923169972901?text=${encodeURIComponent(
-                      `Assalam-o-alaikum, I'd like to order ${p.name} (PKR ${p.price}).`,
-                    )}`}
-                    className="block w-full py-2 text-center text-[0.7rem] font-semibold uppercase tracking-[0.28em] text-gold"
-                  >
-                    Order on WhatsApp
-                  </a>
-                </div>
-              </div>
-              <div className="mt-5">
-                <p className="text-[0.65rem] uppercase tracking-[0.28em] text-gold/80">
-                  {p.family}
-                </p>
-                <h3 className="mt-2 font-serif text-2xl text-cream">{p.name}</h3>
-                <p className="mt-1 text-sm text-muted-foreground">{p.notes}</p>
-                <p className="mt-3 font-serif text-lg text-cream">
-                  PKR {p.price.toLocaleString()}
-                </p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Reviews() {
-  return (
-    <section id="reviews" className="border-t border-border/60 py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-6 md:px-10">
-        <div className="mb-14 text-center">
-          <p className="eyebrow">— Customer Reviews</p>
-          <h2 className="mt-4 font-serif text-4xl text-cream md:text-5xl">
-            What Our <span className="italic text-gold">Clients Say</span>
-          </h2>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {reviews.map((r) => (
-            <figure
-              key={r.name}
-              className="relative border border-border/60 bg-card p-6"
-            >
-              <Quote className="absolute right-4 top-4 h-6 w-6 text-gold/30" />
-              <div className="flex gap-1">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star
-                    key={i}
-                    className={`h-4 w-4 ${
-                      i < r.rating ? "fill-gold text-gold" : "text-cream/20"
-                    }`}
-                  />
-                ))}
-              </div>
-              <blockquote className="mt-4 text-sm leading-relaxed text-cream/80">
-                "{r.text}"
-              </blockquote>
-              <figcaption className="mt-5 border-t border-border/60 pt-4">
-                <p className="font-serif text-lg text-cream">{r.name}</p>
-                <p className="text-[0.65rem] uppercase tracking-[0.28em] text-gold/80">
-                  {r.city}
-                </p>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-
-        <div className="mx-auto mt-14 max-w-2xl border border-gold/40 bg-card p-8">
-          <p className="eyebrow text-center">— Leave a Review</p>
-          <h3 className="mt-3 text-center font-serif text-2xl text-cream">
-            Share Your Experience
-          </h3>
-          <form
-            className="mt-6 grid gap-4"
-            onSubmit={(e) => {
-              e.preventDefault();
-              const form = e.currentTarget as HTMLFormElement;
-              const name = (form.elements.namedItem("name") as HTMLInputElement).value;
-              const rating = (form.elements.namedItem("rating") as HTMLSelectElement).value;
-              const message = (form.elements.namedItem("message") as HTMLTextAreaElement).value;
-              const body = `Name: ${name}%0ARating: ${rating}/5%0A%0A${encodeURIComponent(message)}`;
-              window.location.href = `mailto:kabeerakbar1000@gmail.com?subject=Customer Review — K. Fragrance&body=${body}`;
-            }}
-          >
-            <input
-              name="name"
-              required
-              placeholder="Your name"
-              className="bg-background border border-border/60 px-4 py-3 text-sm text-cream placeholder:text-cream/40 focus:border-gold focus:outline-none"
-            />
+          <div className="flex items-center gap-2">
             <select
-              name="rating"
-              defaultValue="5"
-              className="bg-background border border-border/60 px-4 py-3 text-sm text-cream focus:border-gold focus:outline-none"
+              aria-label="Select currency"
+              value={currency.code}
+              onChange={(e) =>
+                setCurrency(
+                  currencies.find((c) => c.code === e.target.value) ?? currencies[0],
+                )
+              }
+              className="border border-border bg-secondary/40 px-2 py-2 text-[10px] tracking-luxe text-foreground focus:border-gold focus:outline-none"
             >
-              <option value="5">★★★★★ — Excellent</option>
-              <option value="4">★★★★ — Great</option>
-              <option value="3">★★★ — Good</option>
-              <option value="2">★★ — Fair</option>
-              <option value="1">★ — Poor</option>
+              {currencies.map((c) => (
+                <option key={c.code} value={c.code} className="bg-card text-foreground">
+                  {c.code}
+                </option>
+              ))}
             </select>
-            <textarea
-              name="message"
-              required
-              rows={4}
-              placeholder="Tell us about the fragrance…"
-              className="bg-background border border-border/60 px-4 py-3 text-sm text-cream placeholder:text-cream/40 focus:border-gold focus:outline-none"
-            />
-            <button type="submit" className="btn-gold justify-center hover:bg-[var(--color-gold-soft)]">
-              Submit Review <ArrowRight className="h-4 w-4" />
+
+            <button
+              onClick={() => setCartOpen(true)}
+              className="relative px-2 py-2 text-[10px] tracking-luxe text-foreground hover:text-gold"
+            >
+              Cart
+              {count > 0 && (
+                <span className="absolute -right-1 -top-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-gold text-[10px] font-medium text-primary-foreground">
+                  {count}
+                </span>
+              )}
             </button>
-          </form>
+          </div>
         </div>
-      </div>
-    </section>
-  );
-}
 
-function Story() {
-  return (
-    <section id="story" className="border-t border-border/60 py-24 md:py-32">
-      <div className="mx-auto grid max-w-7xl gap-14 px-6 md:grid-cols-2 md:gap-20 md:px-10">
-        <div className="relative">
-          <img
-            src="https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=900&h=1100&q=80"
-            alt="Perfumer crafting a fragrance by hand"
-            className="w-full object-cover"
-          />
-          <div classNameimport { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ArrowLeft, ShoppingBag } from "lucide-react";
-
-export const Route = createFileRoute("/watches")({
-  component: WatchesPage,
-  head: () => ({
-    meta: [
-      { title: "Watches — K. Fragrance | Curated Timepieces in Gujrat, Pakistan" },
-      {
-        name: "description",
-        content:
-          "Curated luxury watches at honest PKR prices — dress, chronograph, diver, pilot, and heritage styles. Order via WhatsApp across Pakistan.",
-      },
-      { property: "og:title", content: "Watches — K. Fragrance" },
-      {
-        property: "og:description",
-        content: "Curated luxury watches at honest prices. Delivered across Pakistan.",
-      },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: "/watches" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [{ rel: "canonical", href: "/watches" }],
-  }),
-});
-
-const watches = [
-  {
-    name: "Classique Or",
-    style: "Dress",
-    detail: "Rose Gold · Leather Strap · 40mm",
-    price: 12500,
-    image:
-      "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=800&h=1000&q=80",
-  },
-  {
-    name: "Marine Bleu",
-    style: "Diver",
-    detail: "Steel · Sapphire Crystal · 42mm",
-    price: 15800,
-    image:
-      "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=800&h=1000&q=80",
-  },
-  {
-    name: "Chrono Noir",
-    style: "Chronograph",
-    detail: "Matte Black · Tachymeter · 44mm",
-    price: 17500,
-    image:
-      "https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=800&h=1000&q=80",
-  },
-  {
-    name: "Aviateur",
-    style: "Pilot",
-    detail: "Brushed Steel · Canvas Strap · 43mm",
-    price: 13900,
-    image:
-      "https://images.unsplash.com/photo-1533139502658-0198f920d8e8?auto=format&fit=crop&w=800&h=1000&q=80",
-  },
-  {
-    name: "Skeleton Royale",
-    style: "Skeleton",
-    detail: "Automatic · Exposed Movement · 41mm",
-    price: 22500,
-    image: "/__l5e/assets-v1/f12aa399-dcf2-40f2-96b0-86c37b37a654/skeleton-watch.jpg",
-  },
-  {
-    name: "Vintage 1968",
-    style: "Heritage",
-    detail: "Cream Dial · Leather · 38mm",
-    price: 11800,
-    image:
-      "https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?auto=format&fit=crop&w=800&h=1000&q=80",
-  },
-  {
-    name: "Sport Titane",
-    style: "Sport",
-    detail: "Titanium · Rubber Strap · 45mm",
-    price: 16400,
-    image:
-      "https://images.unsplash.com/photo-1495856458515-0637185db551?auto=format&fit=crop&w=800&h=1000&q=80",
-  },
-  {
-    name: "Minuit",
-    style: "Dress",
-    detail: "Black Dial · Gold Indices · 39mm",
-    price: 10900,
-    image:
-      "https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?auto=format&fit=crop&w=800&h=1000&q=80",
-  },
-];
-
-function WatchesPage() {
-  return (
-    <div className="min-h-screen bg-background text-foreground">
-      <header className="border-b border-border/60">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 md:px-10">
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.28em] text-cream/80 hover:text-gold"
-          >
-            <ArrowLeft className="h-3.5 w-3.5" /> Back to Perfumes
-          </Link>
-          <Link to="/" className="flex flex-col items-center leading-tight">
-            <span className="font-serif text-2xl italic text-gold md:text-3xl">
-              K. Fragrance
-            </span>
-            <span className="mt-1 text-[0.6rem] uppercase tracking-[0.4em] text-cream/60">
-              Timepieces
-            </span>
-          </Link>
-          <button aria-label="Cart" className="text-cream hover:text-gold">
-            <ShoppingBag className="h-5 w-5" />
-          </button>
+        <div className="mx-auto max-w-7xl px-5 pb-4">
+          <div className="relative">
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder={`Search ${category} by name…`}
+              aria-label={`Search ${category} by name`}
+              className="w-full border border-border bg-secondary/40 py-3 pl-4 pr-24 text-sm text-foreground placeholder:text-muted-foreground focus:border-gold focus:outline-none"
+            />
+            {query.trim() !== "" && (
+              <button
+                onClick={() => setQuery("")}
+                className="absolute right-2 top-1/2 -translate-y-1/2 px-3 py-1.5 text-[10px] tracking-luxe text-gold hover:text-foreground"
+              >
+                Clear
+              </button>
+            )}
+          </div>
         </div>
       </header>
 
-      <section className="border-b border-border/60 py-20 md:py-28">
-        <div className="mx-auto max-w-4xl px-6 text-center md:px-10">
-          <p className="eyebrow">— The House of K.</p>
-          <h1 className="mt-6 font-serif text-5xl leading-tight text-cream md:text-6xl">
-            Time, <span className="italic text-gold">Well Kept</span>
-          </h1>
-          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-cream/75">
-            A tight, honest selection of timepieces — dress, diver, chronograph,
-            and heritage. Fair prices. Real materials. Delivered across Pakistan.
+      {/* HERO */}
+      <section className="relative isolate flex min-h-[62vh] items-center overflow-hidden">
+        <img
+          src={
+            category === "perfumes"
+              ? "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=1920&q=80"
+              : "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=1920&q=80"
+          }
+          alt={
+            category === "perfumes"
+              ? "Luxury perfume bottle on dark satin"
+              : "Luxury mechanical wristwatch close up"
+          }
+          className="absolute inset-0 -z-10 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-background via-background/85 to-background/30" />
+        <div className="mx-auto w-full max-w-7xl px-5 py-24">
+          <p className="text-[10px] tracking-luxe text-gold">
+            {category === "perfumes" ? "The Fragrance Atelier" : "The Horology Vault"}
           </p>
+          <h1 className="mt-6 max-w-2xl font-display text-5xl leading-[1.05] sm:text-7xl">
+            {category === "perfumes" ? (
+              <>
+                Scents That Linger <em className="text-gold">Long After</em> You Leave
+              </>
+            ) : (
+              <>
+                Time, Kept in <em className="text-gold">Precious</em> Company
+              </>
+            )}
+          </h1>
+          <p className="mt-6 max-w-md text-sm leading-relaxed text-muted-foreground">
+            {category === "perfumes"
+              ? "Hand-blended in small batches and aged before bottling. Built to last — in the room, and in memory."
+              : "Hand-finished movements and cases sourced for collectors. Delivered across Pakistan with full authentication."}
+          </p>
+          <a
+            href="#collection"
+            className="mt-10 inline-block border border-gold bg-gold px-8 py-3.5 text-[10px] tracking-luxe text-primary-foreground transition-colors hover:bg-transparent hover:text-gold"
+          >
+            Explore the {category}
+          </a>
         </div>
       </section>
 
-      <section className="py-20 md:py-24">
-        <div className="mx-auto max-w-7xl px-6 md:px-10">
-          <div className="mb-12 flex items-end justify-between gap-6">
-            <div>
-              <p className="eyebrow">— The Collection</p>
-              <h2 className="mt-4 font-serif text-4xl text-cream md:text-5xl">
-                Curated <span className="italic text-gold">Watches</span>
-              </h2>
-            </div>
-            <a
-              href="https://wa.me/923169972901"
-              className="hidden items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.28em] text-gold hover:text-gold-soft md:inline-flex"
+      {/* COLLECTION */}
+      <section id="collection" className="mx-auto max-w-7xl px-5 py-20">
+        <div className="text-center">
+          <p className="text-[10px] tracking-luxe text-gold-soft">
+            {query.trim()
+              ? `${visible.length} of ${inCategory.length} matching “${query.trim()}”`
+              : `${visible.length} pieces available`}
+          </p>
+
+          <h2 className="mt-3 font-display text-4xl sm:text-5xl">
+            The {category === "perfumes" ? "Fragrance" : "Timepiece"} Collection
+          </h2>
+          <div className="gold-rule mx-auto mt-6 h-px w-40" />
+        </div>
+
+        <div className="mt-14 grid grid-cols-2 gap-x-5 gap-y-12 lg:grid-cols-4">
+          {visible.map((p) => (
+            <article key={p.id} className="group">
+              <div className="relative overflow-hidden bg-card">
+                <img
+                  src={p.image}
+                  alt={`${p.name} — ${p.tagline}`}
+                  loading="lazy"
+                  className="aspect-[4/5] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <button
+                  onClick={() => add(p)}
+                  className="absolute inset-x-0 bottom-0 translate-y-full bg-gold py-3 text-[10px] tracking-luxe text-primary-foreground transition-transform duration-300 group-hover:translate-y-0"
+                >
+                  Add to cart
+                </button>
+              </div>
+              <h3 className="mt-4 font-display text-xl">{p.name}</h3>
+              <p className="mt-1 text-xs text-muted-foreground">{p.tagline}</p>
+              <p className="mt-2 text-sm text-gold">{price(p.price)}</p>
+              <button
+                onClick={() => add(p)}
+                className="mt-3 w-full border border-border py-2.5 text-[10px] tracking-luxe text-foreground transition-colors hover:border-gold hover:text-gold lg:hidden"
+              >
+                Add to cart
+              </button>
+            </article>
+          ))}
+        </div>
+
+        {visible.length === 0 && (
+          <div className="mt-14 border border-border/60 px-6 py-16 text-center">
+            <p className="font-display text-2xl">
+              Nothing in {category} matches “{query.trim()}”
+            </p>
+            <p className="mt-3 text-xs text-muted-foreground">
+              Try a shorter word, or browse the full collection.
+            </p>
+            <button
+              onClick={() => setQuery("")}
+              className="mt-8 border border-gold bg-gold px-8 py-3 text-[10px] tracking-luxe text-primary-foreground transition-colors hover:bg-transparent hover:text-gold"
             >
-              Order via WhatsApp <ArrowRight className="h-3.5 w-3.5" />
-            </a>
+              Show all {category}
+            </button>
+          </div>
+        )}
+      </section>
+
+      {/* REVIEWS */}
+      <section id="reviews" className="border-t border-border/60 bg-secondary/20 py-20">
+        <div className="mx-auto max-w-7xl px-5">
+          <div className="text-center">
+            <p className="text-[10px] tracking-luxe text-gold-soft">Customer Reviews</p>
+            <h2 className="mt-3 font-display text-4xl sm:text-5xl">Words From Our Clients</h2>
+            <div className="gold-rule mx-auto mt-6 h-px w-40" />
           </div>
 
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {watches.map((w) => (
-              <article key={w.name} className="group">
-                <div className="relative aspect-[4/5] overflow-hidden bg-secondary">
-                  <img
-                    src={w.image}
-                    alt={`${w.name} — ${w.style} watch`}
-                    className="h-full w-full object-cover transition-transform duration-[1000ms] ease-out group-hover:scale-105"
-                  />
-                  <div className="absolute inset-x-0 bottom-0 translate-y-full bg-background/85 p-4 backdrop-blur transition-transform duration-500 group-hover:translate-y-0">
-                    <a
-                      href={`https://wa.me/923169972901?text=${encodeURIComponent(
-                        `Assalam-o-alaikum, I'd like to order the ${w.name} watch (PKR ${w.price}).`,
-                      )}`}
-                      className="block w-full py-2 text-center text-[0.7rem] font-semibold uppercase tracking-[0.28em] text-gold"
-                    >
-                      Order on WhatsApp
-                    </a>
-                  </div>
-                </div>
-                <div className="mt-5">
-                  <p className="text-[0.65rem] uppercase tracking-[0.28em] text-gold/80">
-                    {w.style}
-                  </p>
-                  <h3 className="mt-2 font-serif text-2xl text-cream">{w.name}</h3>
-                  <p className="mt-1 text-sm text-muted-foreground">{w.detail}</p>
-                  <p className="mt-3 font-serif text-lg text-cream">
-                    PKR {w.price.toLocaleString()}
-                  </p>
-                </div>
-              </article>
+          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {reviews.map((r) => (
+              <figure
+                key={r.id}
+                className="flex h-full flex-col border border-border/60 bg-card p-6"
+              >
+                <Stars rating={r.rating} />
+                <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
+                  “{r.text}”
+                </blockquote>
+                <figcaption className="mt-6 border-t border-border/60 pt-4">
+                  <span className="font-display text-lg text-foreground">{r.name}</span>
+                  <span className="mt-1 block text-[10px] tracking-luxe text-gold-soft">
+                    {r.city}
+               </span>
+                </figcaption>
+              </figure>
             ))}
           </div>
         </div>
       </section>
 
-      <footer className="border-t border-border/60 py-14">
-        <div className="mx-auto max-w-7xl px-6 text-center md:px-10">
-          <p className="font-serif text-2xl italic text-gold">K. Fragrance</p>
-          <p className="mt-4 text-sm text-cream/75">
-            <a href="https://wa.me/923169972901" className="hover:text-gold">
-              WhatsApp · +92 316 9972901
-            </a>
-            {" · "}
-            <a href="mailto:kabeerakbar1000@gmail.com" className="hover:text-gold">
-              kabeerakbar1000@gmail.com
+      {/* FOOTER */}
+      <footer className="border-t border-border/60 px-5 py-14 text-center">
+        <p className="font-display text-2xl tracking-[0.2em]">{BRAND}</p>
+        <p className="mt-1 text-[10px] tracking-luxe text-gold-soft">{BRAND_SUB}</p>
+
+        <div className="mt-6 space-y-2 text-sm">
+          <p>
+            <a href={`tel:+${WHATSAPP_NUMBER}`} className="text-gold hover:text-foreground">{PHONE_DISPLAY}
             </a>
           </p>
-          <p className="mt-6 text-[0.65rem] uppercase tracking-[0.28em] text-cream/50">
-            © {new Date().getFullYear()} K. Fragrance · All Rights Reserved
+          <p>
+            <a href={`mailto:${EMAIL}`} className="text-gold hover:text-foreground">
+              {EMAIL}
+            </a>
           </p>
         </div>
+
+        <p className="mt-6 text-xs text-muted-foreground">
+          Karachi · Lahore · Islamabad — nationwide delivery, cash on delivery available.
+        </p>
+        <p className="mt-4 text-[10px] tracking-luxe text-muted-foreground">
+          © {new Date().getFullYear()} {BRAND} {BRAND_SUB}
+        </p>
       </footer>
+      {/* WHATSAPP FLOAT */}
+      <a
+        href={whatsappHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-full bg-whatsapp px-5 py-3.5 text-[10px] tracking-luxe text-primary-foreground shadow-lg"
+      >
+        Order Now
+      </a>
+{/* CART DRAWER */}
+
+      {cartOpen && (
+
+        <div className="fixed inset-0 z-50 flex justify-end">
+
+          <div
+
+            className="absolute inset-0 bg-background/70 backdrop-blur-sm"
+
+            onClick={() => setCartOpen(false)}
+
+          />
+
+          <aside className="relative flex h-full w-full max-w-sm flex-col border-l border-border bg-card">
+
+            <div className="flex items-center justify-between border-b border-border px-5 py-4">
+
+              <h2 className="text-[10px] tracking-luxe text-gold">Your Selection</h2>
+              <button
+                onClick={() => setCartOpen(false)}
+                className="text-xs text-muted-foreground hover:text-gold"
+              >
+                Close
+              </button>
+            </div>
+
+            <div className="flex-1 space-y-5 overflow-y-auto px-5 py-5">
+              {cart.length === 0 && (
+                <p className="text-sm text-muted-foreground">Your cart is empty.</p>
+              )}
+              {cart.map((l) => (
+                <div key={l.product.id} className="flex gap-4">
+                  <img
+                    src={l.product.image}
+                    alt={l.product.name}
+                    className="h-24 w-20 shrink-0 object-cover"
+                  />
+                  <div className="flex-1">
+                    <h3 className="font-display text-lg leading-tight">{l.product.name}</h3>
+                    <p className="mt-1 text-xs text-gold">{price(l.product.price)}</p>
+                    <div className="mt-3 flex items-center gap-3">
+                      <button
+                        onClick={() => changeQty(l.product.id, -1)}
+                        className="h-7 w-
+7 border border-border text-sm hover:border-gold hover:text-gold"
+                      >
+                        −
+                      </button>
+                      <span className="text-sm">{l.qty}</span>
+                      <button
+                        onClick={() => changeQty(l.product.id, 1)}
+                        className="h-7 w-7 border border-border text-sm hover:border-gold hover:text-gold"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="border-t border-border px-5 py-5">
+              <div className="flex items-center justify-between text-sm">
+                <span className="tracking-luxe text--[10px] text-muted-foreground">
+                  Total ({currency.code})
+                </span>
+                <span className="font-display text-2xl text-gold">{price(total)}</span>
+              </div>
+              <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 block bg-whatsapp py-3.5 text-center text-[10px] tracking-luxe text-primary-foreground"
+              >
+                Order Now on WhatsApp
+              </a>
+            </div>
+          </aside>
+        </div>
+      )}
     </div>
   );
 }
-import { createFileRoute } from "@tanstack/react-router";
-import type {} from "@tanstack/react-start";
-
-const BASE_URL = "";
-
-interface SitemapEntry {
-  path: string;
-  changefreq?: "always" | "hourly" | "daily" | "weekly" | "monthly" | "yearly" | "never";
-  priority?: string;
-}
-
-export const Route = createFileRoute("/sitemap.xml")({
-  server: {
-    handlers: {
-      GET: async () => {
-        const entries: SitemapEntry[] = [
-          { path: "/", changefreq: "weekly", priority: "1.0" },
-          { path: "/watches", changefreq: "weekly", priority: "0.8" },
-        ];
-
-        const urls = entries.map((e) =>
-          [
-            `  <url>`,
-            `    <loc>${BASE_URL}${e.path}</loc>`,
-            e.changefreq ? `    <changefreq>${e.changefreq}</changefreq>` : null,
-            e.priority ? `    <priority>${e.priority}</priority>` : null,
-            `  </url>`,
-          ]
-            .filter(Boolean)
-            .join("\n"),
-        );
-
-        const xml = [
-          `<?xml version="1.0" encoding="UTF-8"?>`,
-          `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`,
-          ...urls,
-          `</urlset>`,
-        ].join("\n");
-
-        return new Response(xml, {
-          headers: {
-            "Content-Type": "application/xml",
-            "Cache-Control": "public, max-age=3600",
-          },
-        });
-      },
-    },
-  },
-});
-import { createStart, createCsrfMiddleware, createMiddleware } from "@tanstack/react-start";
-
-import { renderErrorPage } from "./lib/error-page";
-
-const errorMiddleware = createMiddleware().server(async ({ next }) => {
-  try {
-    return await next();
-  } catch (error) {
-    if (error != null && typeof error === "object" && "statusCode" in error) {
-      throw error;
-    }
-    console.error(error);
-    return new Response(renderErrorPage(), {
-      status: 500,
-      headers: { "content-type": "text/html; charset=utf-8" },
-    });
-  }
-});
-
-const csrfMiddleware = createCsrfMiddleware({
-  filter: (ctx) => ctx.handlerType === "serverFn",
-});
-
-export const startInstance = createStart(() => ({
-  requestMiddleware: [errorMiddleware, csrfMiddleware],
-}));
-import "./lib/error-capture";
-
-import { consumeLastCapturedError } from "./lib/error-capture";
-import { renderErrorPage } from "./lib/error-page";
-
-type ServerEntry = {
-  fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
-};
-
-let serverEntryPromise: Promise<ServerEntry> | undefined;
-
-async function getServerEntry(): Promise<ServerEntry> {
-  if (!serverEntryPromise) {
-    serverEntryPromise = import("@tanstack/react-start/server-entry").then(
-      (m) => (m.default ?? m) as ServerEntry,
-    );
-  }
-  return serverEntryPromise;
-}
-
-async function normalizeCatastrophicSsrResponse(response: Response): Promise<Response> {
-  if (response.status < 500) return response;
-  const contentType = response.headers.get("content-type") ?? "";
-  if (!contentType.includes("application/json")) return response;
-
-  const body = await response.clone().text();
-  if (!isH3SwallowedErrorBody(body)) return response;
-
-  console.error(consumeLastCapturedError() ?? new Error(`h3 swallowed SSR error: ${body}`));
-  return new Response(renderErrorPage(), {
-    status: 500,
-    headers: { "content-type": "text/html; charset=utf-8" },
-  });
-}
-
-function isH3SwallowedErrorBody(body: string): boolean {
-  try {
-    const payload = JSON.parse(body) as { unhandled?: unknown; message?: unknown };
-    return payload.unhandled === true && payload.message === "HTTPError";
-  } catch {
-    return false;
-  }
-}
-
-export default {
-  async fetch(request: Request, env: unknown, ctx: unknown) {
-    try {
-      const handler = await getServerEntry();
-      const response = await handler.fetch(request, env, ctx);
-      return await normalizeCatastrophicSsrResponse(response);
-    } catch (error) {
-      console.error(error);
-      return new Response(renderErrorPage(), {
-        status: 500,
-        headers: { "content-type": "text/html; charset=utf-8" },
-      });
-    }
-  },
-};
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
-/* eslint-disable */
-
-// @ts-nocheck
-
-// noinspection JSUnusedGlobalSymbols
-
-// This file was automatically generated by TanStack Router.
-// You should NOT make any changes in this file as it will be overwritten.
-// Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
-
-import { Route as rootRouteImport } from './routes/__root'
-import { Route as WatchesRouteImport } from './routes/watches'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as IndexRouteImport } from './routes/index'
-
-const WatchesRoute = WatchesRouteImport.update({
-  id: '/watches',
-  path: '/watches',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-
-export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/watches': typeof WatchesRoute
-}
-export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/watches': typeof WatchesRoute
-}
-export interface FileRoutesById {
-  __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/watches': typeof WatchesRoute
-}
-export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/sitemap.xml' | '/watches'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/sitemap.xml' | '/watches'
-  id: '__root__' | '/' | '/sitemap.xml' | '/watches'
-  fileRoutesById: FileRoutesById
-}
-
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/watches': {
-      id: '/watches'
-      path: '/watches'
-      fullPath: '/watches'
-      preLoaderRoute: typeof WatchesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-  }
-}
-
-const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  SitemapDotxmlRoute: SitemapDotxmlRoute,
-  WatchesRoute: WatchesRoute,
-}
-export const routeTree = rootRouteImport
-  ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
